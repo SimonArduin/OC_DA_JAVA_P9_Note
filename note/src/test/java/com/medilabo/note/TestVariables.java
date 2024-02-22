@@ -10,10 +10,12 @@ public class TestVariables {
 
     public Note note;
     public List<Note> noteList;
+    public String stringBlank;
 
     public void initializeVariables() {
         note = new Note(1, "patient", "note");
         noteList = List.of(note);
+        stringBlank = " ";
     }
 
 }

@@ -1,9 +1,9 @@
 package com.medilabo.note.unit;
 
 import com.medilabo.note.TestVariables;
+import com.medilabo.note.domain.Note;
 import com.medilabo.note.repository.NoteRepository;
 import com.medilabo.note.service.NoteService;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -30,8 +30,19 @@ public class NoteServiceTest extends TestVariables {
     public void setUpPerTest() {
         initializeVariables();
         note.setId("noteId");
+        when(noteRepository.save(any(Note.class))).thenReturn(note);
         when(noteRepository.findById(any(String.class))).thenReturn(Optional.of(note));
         when(noteRepository.findByPatId(any(Integer.class))).thenReturn(noteList);
+    }
+
+    @Nested
+    public class addNoteTests {
+
+        @Test
+        public void addNoteTest() throws Exception {
+            assertEquals(note, noteService.addNote(note));
+        }
+
     }
 
     @Nested
@@ -39,7 +50,7 @@ public class NoteServiceTest extends TestVariables {
 
         @Test
         public void findByIdTest() throws Exception {
-            assertEquals(note, noteService.findById(note.getId().toString()));
+            assertEquals(note, noteService.findById(note.getId()));
         }
 
     }

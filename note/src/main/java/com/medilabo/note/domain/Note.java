@@ -1,5 +1,6 @@
 package com.medilabo.note.domain;
-import org.bson.types.ObjectId;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,9 +11,14 @@ public class Note {
 
     @Id
     private String id;
+    @NotNull
     private Integer patId;
+    @NotBlank
     private String patient;
+    @NotBlank
     private String note;
+
+    public Note() {}
 
     public Note(Integer patId, String patient, String note) {
         this.patId = patId;
