@@ -1,5 +1,4 @@
 package com.medilabo.note.domain;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,7 +9,7 @@ import java.util.Objects;
 public class Note {
 
     @Id
-    private ObjectId _id;
+    private String id;
     private Integer patId;
     private String patient;
     private String note;
@@ -29,12 +28,12 @@ public class Note {
         return Objects.equals(patId, note1.patId) && Objects.equals(patient, note1.patient) && Objects.equals(note, note1.note);
     }
 
-    public ObjectId get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(ObjectId _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Integer getPatId() {

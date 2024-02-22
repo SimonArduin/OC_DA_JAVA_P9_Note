@@ -21,4 +21,6 @@ public class NoteController {
     public List<Note> findByPatId(Integer patId) throws Exception {
         return noteService.findByPatId(patId);
     }
+
+
 }

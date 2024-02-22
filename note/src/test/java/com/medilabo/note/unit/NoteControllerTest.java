@@ -27,7 +27,7 @@ public class NoteControllerTest extends TestVariables {
     @BeforeEach
     public void setUpPerTest() throws Exception {
         initializeVariables();
-        note.set_id(new ObjectId("noteId"));
+        note.setId("noteId");
         when(noteService.findById(any(String.class))).thenReturn(note);
         when(noteService.findByPatId(any(Integer.class))).thenReturn(noteList);
     }
@@ -37,7 +37,7 @@ public class NoteControllerTest extends TestVariables {
 
         @Test
         public void findByIdTest() throws Exception {
-            assertEquals(note, noteController.findById(note.get_id().toString()));
+            assertEquals(note, noteController.findById(note.getId().toString()));
         }
 
     }

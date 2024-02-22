@@ -29,7 +29,7 @@ public class NoteServiceTest extends TestVariables {
     @BeforeEach
     public void setUpPerTest() {
         initializeVariables();
-        note.set_id(new ObjectId("noteId"));
+        note.setId("noteId");
         when(noteRepository.findById(any(String.class))).thenReturn(Optional.of(note));
         when(noteRepository.findByPatId(any(Integer.class))).thenReturn(noteList);
     }
@@ -39,7 +39,7 @@ public class NoteServiceTest extends TestVariables {
 
         @Test
         public void findByIdTest() throws Exception {
-            assertEquals(note, noteService.findById(note.get_id().toString()));
+            assertEquals(note, noteService.findById(note.getId().toString()));
         }
 
     }
