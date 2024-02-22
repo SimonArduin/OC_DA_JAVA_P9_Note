@@ -3,6 +3,7 @@ package com.medilabo.note.unit;
 import com.medilabo.note.TestVariables;
 import com.medilabo.note.repository.NoteRepository;
 import com.medilabo.note.service.NoteService;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,9 @@ public class NoteServiceTest extends TestVariables {
     @BeforeEach
     public void setUpPerTest() {
         initializeVariables();
-        note.setId("noteId");
+        note.set_id(new ObjectId("noteId"));
         when(noteRepository.findById(any(String.class))).thenReturn(Optional.of(note));
+        when(noteRepository.findByPatId(any(Integer.class))).thenReturn(noteList);
     }
 
     @Nested
@@ -37,7 +39,17 @@ public class NoteServiceTest extends TestVariables {
 
         @Test
         public void findByIdTest() throws Exception {
-            assertEquals(note, noteService.findById(note.getId()));
+            assertEquals(note, noteService.findById(note.get_id().toString()));
+        }
+
+    }
+
+    @Nested
+    public class findByPatIdTests {
+
+        @Test
+        public void findByPatIdTest() throws Exception {
+            assertEquals(noteList, noteService.findByPatId(note.getPatId()));
         }
 
     }
