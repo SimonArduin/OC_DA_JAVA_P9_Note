@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -44,13 +44,13 @@ public class NoteControllerTest extends TestVariables {
 
         @Test
         public void addNoteTest() {
-            assertEquals(note, noteController.addNote(note, bindingResult));
+            assertEquals(note, noteController.addNote(note, bindingResult).getBody());
         }
 
         @Test
         public void addNoteTestIfNotValid() {
             when(bindingResult.hasErrors()).thenReturn(true);
-            assertThrows(IllegalArgumentException.class, () -> noteController.addNote(note, bindingResult));
+            assertEquals(HttpStatus.BAD_REQUEST, noteController.addNote(note, bindingResult).getStatusCode());
         }
 
     }
@@ -60,7 +60,7 @@ public class NoteControllerTest extends TestVariables {
 
         @Test
         public void findByIdTest() throws Exception {
-            assertEquals(note, noteController.findById(note.getId()));
+            assertEquals(note, noteController.findById(note.getId()).getBody());
         }
 
     }
@@ -70,7 +70,7 @@ public class NoteControllerTest extends TestVariables {
 
         @Test
         public void findByPatIdTest() throws Exception {
-            assertEquals(noteList, noteController.findByPatId(note.getPatId()));
+            assertEquals(noteList, noteController.findByPatId(note.getPatId()).getBody());
         }
 
     }

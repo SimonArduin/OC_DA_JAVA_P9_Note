@@ -9,6 +9,9 @@ import java.util.List;
 public class TestVariables {
 
     public Note note;
+
+    // stores the id of the note created for integration tests
+    public String noteId;
     public List<Note> noteList;
     public String stringBlank;
 

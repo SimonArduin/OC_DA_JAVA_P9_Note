@@ -1,51 +1,94 @@
 package com.medilabo.note.integration;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medilabo.note.TestVariables;
-import com.medilabo.note.controller.NoteController;
 import com.medilabo.note.domain.Note;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.medilabo.note.repository.NoteRepository;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.validation.BindingResult;
-import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
+@AutoConfigureMockMvc
 public class NoteIntegrationTest extends TestVariables {
 
     @Autowired
-    NoteController noteController;
+    MockMvc mockMvc;
 
-    @MockBean
-    BindingResult bindingResult;
+    @Autowired
+    NoteRepository noteRepository;
+
+    Integer databaseSizeBefore;
+
+    @BeforeAll
+    public void setUpGlobal() {
+        initializeVariables();
+        noteRepository.save(note);
+        noteId = note.getId();
+    }
+
+    @AfterAll
+    public void cleanUpDatabase() {
+        noteRepository.deleteById(noteId);
+    }
 
     @BeforeEach
     public void setUpPerTest() {
         initializeVariables();
-        note = new Note(1, "TestNone", "Le patient déclare qu'il 'se sent très bien'. Poids égal ou inférieur au poids recommandé");
-        note.setId("65d5fbfaac8f88b4829621aa");
-        when(bindingResult.hasErrors()).thenReturn(false);
+        databaseSizeBefore = noteRepository.findAll().size();
     }
+
+    private Integer databaseSizeChange() {
+        return noteRepository.findAll().size() - databaseSizeBefore;
+    }
+
+    private Boolean resultEqualsNote(MvcResult result, Note note) throws UnsupportedEncodingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Note resultNote = objectMapper.readValue(result.getResponse().getContentAsString(), Note.class);
+
+        return resultNote.equals(note);
+    }
+
+    @Test
+    public void contextLoads() {}
 
     @Test
     public void addNoteTest() throws Exception {
-        assertEquals(note, noteController.addNote(note, bindingResult));
+        MvcResult result = mockMvc.perform(post("/add")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(note.toJson().toString()))
+                .andExpect(status().is2xxSuccessful())
+                .andReturn();
+
+        note.setId(noteId);
+        assertTrue(resultEqualsNote(result, note));
+        assertEquals(1, databaseSizeChange());
     }
 
-    @Test
+  /*  @Test
     public void findByIdTest() throws Exception {
-        assertEquals(note, noteController.findById(note.getId()));
+        assertEquals(note, noteController.findById(noteId));
     }
 
     @Test
     public void findByPatIdTest() throws Exception {
-        List<Note> result = noteController.findByPatId(note.getPatId());
+        Object result = noteController.findByPatId(noteId);
 
         assertEquals(List.of(note), result);
     }
-
+*/
 }

@@ -1,4 +1,5 @@
 package com.medilabo.note.domain;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
@@ -32,6 +33,16 @@ public class Note {
         if (o == null || getClass() != o.getClass()) return false;
         Note note1 = (Note) o;
         return Objects.equals(patId, note1.patId) && Objects.equals(patient, note1.patient) && Objects.equals(note, note1.note);
+    }
+
+    public String toJson() {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}";
+        }
     }
 
     public String getId() {
