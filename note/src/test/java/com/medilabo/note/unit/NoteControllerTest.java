@@ -32,7 +32,6 @@ public class NoteControllerTest extends TestVariables {
     @BeforeEach
     public void setUpPerTest() throws Exception {
         initializeVariables();
-        note.setId("noteId");
         when(noteService.addNote(any(Note.class))).thenReturn(note);
         when(noteService.findById(any(String.class))).thenReturn(note);
         when(noteService.findByPatId(any(Integer.class))).thenReturn(noteList);

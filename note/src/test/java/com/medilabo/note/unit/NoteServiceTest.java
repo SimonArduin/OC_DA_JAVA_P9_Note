@@ -29,7 +29,6 @@ public class NoteServiceTest extends TestVariables {
     @BeforeEach
     public void setUpPerTest() {
         initializeVariables();
-        note.setId("noteId");
         when(noteRepository.save(any(Note.class))).thenReturn(note);
         when(noteRepository.findById(any(String.class))).thenReturn(Optional.of(note));
         when(noteRepository.findByPatId(any(Integer.class))).thenReturn(noteList);

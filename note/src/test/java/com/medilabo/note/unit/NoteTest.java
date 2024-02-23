@@ -24,7 +24,6 @@ public class NoteTest extends TestVariables {
     @BeforeEach
     public void setUpPerTest() {
         initializeVariables();
-        note.setId("noteId");
     }
 
     @Test
