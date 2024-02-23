@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -55,10 +54,12 @@ public class NoteIntegrationTest extends TestVariables {
         databaseSizeBefore = noteRepository.findAll().size();
     }
 
+    // utility method that returns how much the database size has changed since the beginning of a test
     private Integer databaseSizeChange() {
         return noteRepository.findAll().size() - databaseSizeBefore;
     }
 
+    // utility method that extracts a Note from a MvcResult and compares it to another Note
     private Boolean resultEqualsNote(MvcResult result, Note note) throws UnsupportedEncodingException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Note resultNote = objectMapper.readValue(result.getResponse().getContentAsString(), Note.class);
@@ -66,6 +67,7 @@ public class NoteIntegrationTest extends TestVariables {
         return resultNote.equals(note);
     }
 
+    // utility method that extracts a List<Note> from a MvcResult and compares it to another List<Note>
     private Boolean resultEqualsNoteList(MvcResult result, List<Note> noteList) throws UnsupportedEncodingException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Note> resultNoteList = objectMapper.readValue(
@@ -83,7 +85,7 @@ public class NoteIntegrationTest extends TestVariables {
         note.setId(null);
         MvcResult result = mockMvc.perform(post("/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(note.toJson().toString()))
+                        .content(note.toJson()))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
 
