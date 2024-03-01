@@ -21,8 +21,8 @@ public class NoteService {
         return noteRepository.findById(id).orElseThrow(() -> new Exception("Note with id " + id + " not found"));
     }
 
-    public List<Note> findByPatId(Integer patId) {
-        return noteRepository.findByPatId(patId);
+    public List<Note> findByPatientId(Integer patientId) {
+        return noteRepository.findByPatientId(patientId);
     }
 
 }

@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Objects;
 
@@ -12,8 +13,9 @@ public class Note {
 
     @Id
     private String id;
+    @Field("patId")
     @NotNull
-    private Integer patId;
+    private Integer patientId;
     @NotBlank
     private String patient;
     @NotBlank
@@ -21,8 +23,8 @@ public class Note {
 
     public Note() {}
 
-    public Note(Integer patId, String patient, String note) {
-        this.patId = patId;
+    public Note(Integer patientId, String patient, String note) {
+        this.patientId = patientId;
         this.patient = patient;
         this.note = note;
     }
@@ -32,7 +34,7 @@ public class Note {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Note note1 = (Note) o;
-        return Objects.equals(patId, note1.patId) && Objects.equals(patient, note1.patient) && Objects.equals(note, note1.note);
+        return Objects.equals(patientId, note1.patientId) && Objects.equals(patient, note1.patient) && Objects.equals(note, note1.note);
     }
 
     public String toJson() {
@@ -53,12 +55,12 @@ public class Note {
         this.id = id;
     }
 
-    public Integer getPatId() {
-        return patId;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public void setPatId(Integer patId) {
-        this.patId = patId;
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatient() {

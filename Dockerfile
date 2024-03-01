@@ -4,4 +4,4 @@ COPY note/target/note-0.0.1-SNAPSHOT.jar .
 COPY note/src/main/resources/application.properties .
 RUN sed -i 's/localhost/host.docker.internal/g' application.properties
 CMD ["java", "-jar", "note-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8010
+EXPOSE 8001

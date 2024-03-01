@@ -111,9 +111,9 @@ public class NoteIntegrationTest extends TestVariables {
     }
 
     @Test
-    public void findByPatIdTest() throws Exception {
-        MvcResult result = mockMvc.perform(get("/getbypatid")
-                        .param("patId",note.getPatId().toString()))
+    public void findByPatientIdTest() throws Exception {
+        MvcResult result = mockMvc.perform(get("/getbypatientid")
+                        .param("patientId",note.getPatientId().toString()))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
 

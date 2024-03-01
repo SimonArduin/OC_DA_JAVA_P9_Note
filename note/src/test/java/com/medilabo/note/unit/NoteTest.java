@@ -39,11 +39,11 @@ public class NoteTest extends TestVariables {
         }
 
         @Nested
-        public class patIdTests {
+        public class patientIdTests {
 
             @Test
-            public void patIdNotNull() {
-                note.setPatId(null);
+            public void patientIdNotNull() {
+                note.setPatientId(null);
                 Set<ConstraintViolation<Note>> violations = validator.validate(note);
                 assertFalse(violations.isEmpty());
             }

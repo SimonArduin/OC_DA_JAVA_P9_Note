@@ -34,7 +34,7 @@ public class NoteControllerTest extends TestVariables {
         initializeVariables();
         when(noteService.addNote(any(Note.class))).thenReturn(note);
         when(noteService.findById(any(String.class))).thenReturn(note);
-        when(noteService.findByPatId(any(Integer.class))).thenReturn(noteList);
+        when(noteService.findByPatientId(any(Integer.class))).thenReturn(noteList);
         when(bindingResult.hasErrors()).thenReturn(false);
     }
 
@@ -65,11 +65,11 @@ public class NoteControllerTest extends TestVariables {
     }
 
     @Nested
-    public class findByPatIdTests {
+    public class findByPatientIdTests {
 
         @Test
-        public void findByPatIdTest() throws Exception {
-            assertEquals(noteList, noteController.findByPatId(note.getPatId()).getBody());
+        public void findByPatientIdTest() throws Exception {
+            assertEquals(noteList, noteController.findByPatientId(note.getPatientId()).getBody());
         }
 
     }

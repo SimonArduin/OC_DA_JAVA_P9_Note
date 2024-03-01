@@ -24,23 +24,41 @@ public class NoteController {
 
     private static final Logger logger = LoggerFactory.getLogger(NoteController.class);
 
+    /**
+     * This method returns a specific note.
+     * @param id
+     * @return A ResponseEntity with a Note in its body
+     * @throws Exception
+     */
     @GetMapping("getbyid")
     public ResponseEntity findById(String id) throws Exception {
         logger.info("received request to find note with id " + id);
         return ResponseEntity.ok().body(noteService.findById(id));
     }
 
-    @GetMapping("getbypatid")
-    public ResponseEntity findByPatId(Integer patId) throws Exception {
-        logger.info("received request to find all notes with patId " + patId);
-        return ResponseEntity.ok().body(noteService.findByPatId(patId));
+    /**
+     * This method returns all notes with a specific patientId.
+     * @param patientId
+     * @return A ResponseEntity with a List&lt;Note&gt; in its body
+     * @throws Exception
+     */
+    @GetMapping("getbypatientid")
+    public ResponseEntity findByPatientId(Integer patientId) throws Exception {
+        logger.info("received request to find all notes with patientId " + patientId);
+        return ResponseEntity.ok().body(noteService.findByPatientId(patientId));
     }
 
+    /**
+     * This method adds a note to the database, if it is valid.
+     * @param note
+     * @param bindingResult
+     * @return A ResponseEntity
+     */
     @PostMapping("add")
     public ResponseEntity addNote(@Valid @RequestBody Note note, BindingResult bindingResult) {
         // if note is valid, add it to database
         if (!bindingResult.hasErrors()) {
-            logger.info("received request to add note with patId " + note.getPatId());
+            logger.info("received request to add note with patientId " + note.getPatientId());
             return ResponseEntity.created(null).body(noteService.addNote(note));
         }
 
