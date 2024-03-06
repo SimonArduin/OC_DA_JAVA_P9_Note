@@ -51,25 +51,6 @@ public class NoteTest extends TestVariables {
         }
 
         @Nested
-        public class patientTests {
-
-            @Test
-            public void patientNotNull() {
-                note.setPatient(null);
-                Set<ConstraintViolation<Note>> violations = validator.validate(note);
-                assertFalse(violations.isEmpty());
-            }
-
-            @Test
-            public void patientNotBlank() {
-                note.setPatient(stringBlank);
-                Set<ConstraintViolation<Note>> violations = validator.validate(note);
-                assertFalse(violations.isEmpty());
-            }
-
-        }
-
-        @Nested
         public class noteTests {
 
             @Test

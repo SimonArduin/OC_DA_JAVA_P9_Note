@@ -16,7 +16,7 @@ public class TestVariables {
     public String stringBlank;
 
     public void initializeVariables() {
-        note = new Note(0, "patient", "note");
+        note = new Note(0, "note");
         note.setId("noteId");
         noteList = List.of(note);
         stringBlank = " ";
