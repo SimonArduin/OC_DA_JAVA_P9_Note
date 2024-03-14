@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621aa"
+  },
+  "patId": 1,
+  "note": "Le patient déclare qu'il 'se sent très bien'. Poids égal ou inférieur au poids recommandé"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621ab"
+  },
+  "patId": 2,
+  "note": "Le patient déclare qu'il ressent beaucoup de stress au travail. Il se plaint également que son audition est anormale dernièrement"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621ac"
+  },
+  "patId": 2,
+  "note": "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois. Il remarque également que son audition continue d'être anormale"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621ad"
+  },
+  "patId": 3,
+  "note": "Le patient déclare qu'il fume depuis peu"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621ae"
+  },
+  "patId": 3,
+  "note": "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière. Il se plaint également de crises d’apnée respiratoire anormales. Tests de laboratoire indiquant un taux de cholestérol LDL élevé"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621af"
+  },
+  "patId": 4,
+  "note": "Le patient déclare qu'il lui est devenu difficile de monter les escaliers. Il se plaint également d’être essoufflé. Tests de laboratoire indiquant que les anticorps sont élevés. Réaction aux médicaments"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621b0"
+  },
+  "patId": 4,
+  "note": "Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps"
+},
+{
+  "_id": {
+    "$oid": "65d5fbfaac8f88b4829621b1"
+  },
+  "patId": 4,
+  "note": "Le patient déclare avoir commencé à fumer depuis peu. Hémoglobine A1C supérieure au niveau recommandé. Taille, Poids, Cholestérol, Vertige et Réaction"
+}]

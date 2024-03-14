@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Objects;
 
-@Document(collection = "notes")
+@Document(collection = "note")
 public class Note {
 
     @Id
